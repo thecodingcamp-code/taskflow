@@ -53,7 +53,6 @@ app.use(
   }),
 );
 app.use(express.json());
-app.use(cookieParser());
 
 app.get("/api/health", (_request, response) => {
   response.json({ message: "TaskFlow API is running" });
