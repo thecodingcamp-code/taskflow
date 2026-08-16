@@ -6,6 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node --watch src/server.ts",
+    "build": "prisma migrate deploy && npm run typecheck",
+    "postinstall": "prisma generate",
     "typecheck": "tsc",
     "start": "node src/server.ts"
   },
