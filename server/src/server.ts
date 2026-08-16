@@ -6,10 +6,6 @@ import cors from "cors";
 import "dotenv/config";
 import { prisma } from "./lib/prisma.ts";
 
-import cookieParser from "cookie-parser";
-import * as argon2 from "argon2";
-import { SignJWT, jwtVerify } from "jose";
-
 
 type Project = {
   id: number;
@@ -38,24 +34,6 @@ declare global {
       userId?: number;
     }
   }
-}
-
-
-const secretKey = new TextEncoder().encode(jwtSecret);
-const cookieName = "taskflow_token";
-const cookieOptions = {
-  httpOnly: true,
-  sameSite: "lax" as const,
-  secure: process.env.NODE_ENV === "production",
-  path: "/",
-};
-
-async function createAuthToken(userId: number) {
-  return new SignJWT({ userId })
-    .setProtectedHeader({ alg: "HS256" })
-    .setIssuedAt()
-    .setExpirationTime("1d")
-    .sign(secretKey);
 }
 
 
